@@ -35,6 +35,8 @@ if __name__ == '__main__':
     ETH_df = CleanData('ETH')
     BTC_df = CleanData('BTC')
 
+
+
     ## Calculate the Correlation between Hash Rate and Price
     BTC_1D_Corr = BTC_df['Hash Rate'].corr(BTC_df['Price'])
     ETH_1D_Corr = ETH_df['Hash Rate'].corr(ETH_df['Price'])
@@ -42,6 +44,22 @@ if __name__ == '__main__':
     ## Moving Average???
     BTC_5D_Corr = BTC_df['Hash Rate'].rolling(5).corr(BTC_df['Price'])
     ETH_5D_Corr = ETH_df['Hash Rate'].rolling(5).corr(ETH_df['Price'])
+
+    BTC_df['5MA Hash Rate'] = BTC_df.iloc[:,1].rolling(window= 5).mean()
+    BTC_df['5MA Price'] = BTC_df.iloc[:,2].rolling(window= 5).mean()
+
+    ETH_df['5MA Hash Rate'] = ETH_df.iloc[:,1].rolling(window= 5).mean()
+    ETH_df['5MA Price'] = ETH_df.iloc[:,2].rolling(window= 5).mean()
+
+    BTC_5D_Corr = BTC_df['5MA Hash Rate'].corr(BTC_df['5MA Price'])
+    ETH_5D_Corr = ETH_df['5MA Hash Rate'].corr(ETH_df['5MA Price'])
+
+
+    ## Calculate the Correlation between BTC and ETH
+    BTC_ETH_Corr = BTC_df['Price'].corr(ETH_df['Price'])
+
+    # print("BTC & ETH Corr: " + str(BTC_ETH_Corr))
+
 
     ##################################################################################
     '''
@@ -56,17 +74,23 @@ if __name__ == '__main__':
     ETH_POW_Corr = ETH_POW_df['Hash Rate'].corr(ETH_df['Price'])
     ETH_POW_POS_Corr = ETH_POW_POS_df['Hash Rate'].corr(ETH_df['Price'])
 
-    # print('ETH All Time Corr is : ' + str(ETH_1D_Corr))
-    # print('ETH POW Corr is : ' + str(ETH_POW_Corr))
+
+    # print('BTC All Time Corr is : ' + str(BTC_1D_Corr))
+    # print("BTC 5MA corr: " + str(BTC_5D_Corr))
+    
+    # print('\n' + 'ETH All Time Corr is : ' + str(ETH_1D_Corr))
+    # print("ETH 5MA corr: " + str(ETH_5D_Corr))
+
+    # print('\n' + 'ETH POW Corr is : ' + str(ETH_POW_Corr))
     # print('ETH POW & POS Corr is : ' + str(ETH_POW_POS_Corr))
-    # print('\n' + 'BTC All Time Corr is : ' + str(BTC_1D_Corr))
 
-    BTC_5D_Corr = BTC_5D_Corr.dropna()
-    print(max(BTC_5D_Corr))
-    print(min(BTC_5D_Corr))
 
-    plt.plot(BTC_5D_Corr)
-    plt.show()
+    # BTC_5D_Corr = BTC_5D_Corr.dropna()
+    # print(max(BTC_5D_Corr))
+    # print(min(BTC_5D_Corr))
+
+    # plt.plot(BTC_5D_Corr)
+    # plt.show()
 
     '''
     fig, ax = plt.subplots()
@@ -81,9 +105,38 @@ if __name__ == '__main__':
 
     '''
 
+    # ETH_Start_Date = datetime.strptime('2015-08-07', '%Y-%m-%d')
+    # New_BTC_df = BTC_df[BTC_df['timestamp'] > ETH_Start_Date]
+
+    # fig, ax = plt.subplots()
+    # ax.plot(New_BTC_df['timestamp'], New_BTC_df['Price'], color = 'red', label = "BTC")
+    # ax.set_xlabel("time")
+    # ax.set_ylabel("BTC", color = "red")
+
+    # ax2 = ax.twinx()
+    # ax2.plot(New_BTC_df['timestamp'], ETH_df['Price'], color = 'blue', label = "ETH")
+    # ax2.set_ylabel("ETH", color = "blue")
+    # plt.show()
+
 
     # plt.plot(ETH_df['timestamp'], ETH_df['Price'], label = 'Price')
     # plt.plot(ETH_df['timestamp'], ETH_df['Hash Rate'], label = 'Hash Rate')
 
     # plt.legend()
     # plt.show()
+
+
+    XCH_Price = pd.read_csv('./data/XCH-USD.csv')
+
+    XCH_Start_Date = datetime.strptime('2021-05-01', '%Y-%m-%d')
+    XCH_BTC_df = BTC_df[BTC_df['timestamp'] > XCH_Start_Date]
+
+    #print(XCH_BTC_df)
+
+    XCH_BTC_Corr = XCH_BTC_df['Price'].corr(XCH_Price['Close'])
+
+    print(XCH_Price['Close'])
+    print(XCH_BTC_df['Price'])
+
+    print(XCH_BTC_Corr)
+
