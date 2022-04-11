@@ -5,6 +5,12 @@ from datetime import datetime
 
 def Hash_Ribbon():
 
-    
+
+
+    return
+
+
+
+def SMA():
 
     return
