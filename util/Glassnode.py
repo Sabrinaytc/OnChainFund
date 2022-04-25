@@ -28,6 +28,12 @@ print(df_nested_list)
 
 
 
-def GetData(url):
+def GetData(url, params):
 
-    return
+    res = requests.get(url, params=params)
+    data = res.json()
+
+    df_nested_list = pd.json_normalize(data)
+    df_nested_list['t'] = pd.to_datetime(df_nested_list['t'], unit= 's') 
+
+    return df_nested_list
