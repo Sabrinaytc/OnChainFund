@@ -7,7 +7,7 @@ import util.Glassnode as GN
 API_KEY = config.Glassnode_API_KEY
 HashRate = config.HashRate
 HashRibbon = config.HashRibbon
-params = {{'a': 'BTC', 'api_key': API_KEY}}
+params = {'a': 'BTC', 'api_key': API_KEY}
 
 
 ## Parameters
