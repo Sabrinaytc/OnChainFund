@@ -8,5 +8,5 @@ Difficulty = "https://api.glassnode.com/v1/metrics/mining_difficulty_latest"
 
 
 ## Inidicators Endpoints
-HashRibbon = "https://api.glassnode.com/v1/metrics/indicators/hiash_ribbon"
+HashRibbon = "https://api.glassnode.com/v1/metrics/indicators/hash_ribbon"
 DifficultyRibbon = "https://api.glassnode.com/v1/metrics/indicators/difficulty_ribbon"

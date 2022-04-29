@@ -2,11 +2,15 @@ import pandas as pd
 import numpy as np
 import util.Config as config
 import util.Glassnode as GN
+import util.Indicators as Indicators
 
 
 API_KEY = config.Glassnode_API_KEY
 HashRate = config.HashRate
 HashRibbon = config.HashRibbon
+Difficulty = config.Difficulty
+DifficultyRibbon = config.DifficultyRibbon
+
 params = {'a': 'BTC', 'api_key': API_KEY}
 
 
@@ -23,6 +27,9 @@ f : string (format) JSON, CSV
 
 if __name__ == '__main__':
 
-    HashRate_Data = GN.GetData(url=HashRate, params=params)
+    HashRate_Data = Indicators.Get_RawData(url=HashRate, params=params, value_name= 'HashRate')
+
+    HashRibbon_Data = Indicators.Get_Ribbon(url=HashRibbon, params=params)
 
     print(HashRate_Data)
+    print(HashRibbon_Data)
