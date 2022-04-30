@@ -6,6 +6,7 @@ import util.Indicators as Indicators
 
 
 API_KEY = config.Glassnode_API_KEY
+ClosedPrice = config.ClosedPrice
 HashRate = config.HashRate
 HashRibbon = config.HashRibbon
 Difficulty = config.Difficulty
@@ -27,9 +28,16 @@ f : string (format) JSON, CSV
 
 if __name__ == '__main__':
 
+    ## Variables Declaration
+    Column_Name = ["Date", "Price", "Buy/Sell"]
+
+
     HashRate_Data = Indicators.Get_RawData(url=HashRate, params=params, value_name= 'HashRate')
+    ClosedPrice_Data = Indicators.Get_RawData(url=ClosedPrice, params=params, value_name='Closed Price')
+
 
     HashRibbon_Data = Indicators.Get_Ribbon(url=HashRibbon, params=params)
 
-    print(HashRate_Data)
-    print(HashRibbon_Data)
+    # print(HashRate_Data)
+    # print(HashRibbon_Data)
+    # print(ClosedPrice_Data)
