@@ -38,6 +38,10 @@ if __name__ == '__main__':
 
     HashRibbon_Data = Indicators.Get_Ribbon(url=HashRibbon, params=params)
 
+
+    print(HashRibbon_Data[["o.crossed"] > 0])
+    # print(HashRibbon[:, ["o.crossed"] > 0])
+
     # print(HashRate_Data)
     # print(HashRibbon_Data)
     # print(ClosedPrice_Data)
